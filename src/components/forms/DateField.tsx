@@ -4,12 +4,13 @@ interface DateFieldProps {
   label: string;
   value: string;
   onChange: (value: string) => void;
+  min?: string;
   max?: string;
   required?: boolean;
 }
 
 /** Input de fecha con un botón de calendario explícito — el indicador nativo del navegador no siempre responde al click. */
-export function DateField({ label, value, onChange, max, required }: DateFieldProps) {
+export function DateField({ label, value, onChange, min, max, required }: DateFieldProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   return (
@@ -21,6 +22,7 @@ export function DateField({ label, value, onChange, max, required }: DateFieldPr
           type="date"
           value={value}
           onChange={(event) => onChange(event.target.value)}
+          min={min}
           max={max}
           required={required}
           className="date-input w-full rounded-lg border border-ink/15 bg-base px-3 py-2 pr-10 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
