@@ -1,9 +1,17 @@
+import { useLiveQuery } from 'dexie-react-hooks';
 import { type FormEvent, useEffect, useState } from 'react';
+import { CheckboxGroup } from '../components/forms/CheckboxGroup';
 import { DateField } from '../components/forms/DateField';
 import { ScaleSelector } from '../components/forms/ScaleSelector';
 import { TextField } from '../components/forms/TextField';
 import { getFirstUsedDate } from '../db/init';
-import { getDailyLogByDate, getEarliestDailyLogDate, upsertDailyLog } from '../db/repositories';
+import {
+  getDailyLogByDate,
+  getEarliestDailyLogDate,
+  habitsRepo,
+  triggersRepo,
+  upsertDailyLog,
+} from '../db/repositories';
 import type { DailyLog, Scale1to5 } from '../db/types';
 import { toDateKey } from '../lib/dates';
 
@@ -20,6 +28,8 @@ interface FormState {
   energy: Scale1to5 | undefined;
   mood: Scale1to5 | undefined;
   notes: string;
+  triggerIds: number[];
+  habitIds: number[];
 }
 
 const emptyForm: FormState = {
@@ -35,6 +45,8 @@ const emptyForm: FormState = {
   energy: undefined,
   mood: undefined,
   notes: '',
+  triggerIds: [],
+  habitIds: [],
 };
 
 function formFromLog(log: DailyLog): FormState {
@@ -51,6 +63,8 @@ function formFromLog(log: DailyLog): FormState {
     energy: log.energy,
     mood: log.mood,
     notes: log.notes ?? '',
+    triggerIds: log.triggerIds,
+    habitIds: log.habitIds,
   };
 }
 
@@ -63,7 +77,10 @@ export function RegistroScreen() {
   const [form, setForm] = useState<FormState>(emptyForm);
   const [existingLog, setExistingLog] = useState<DailyLog | null>(null);
   const [savedForDate, setSavedForDate] = useState<string | null>(null);
+  const [isDirty, setIsDirty] = useState(false);
   const saved = savedForDate === date;
+  const triggers = useLiveQuery(() => triggersRepo.getActive()) ?? [];
+  const habits = useLiveQuery(() => habitsRepo.getActive()) ?? [];
 
   useEffect(() => {
     Promise.all([getFirstUsedDate(), getEarliestDailyLogDate()]).then(([firstUsedIso, earliestLogDate]) => {
@@ -81,6 +98,7 @@ export function RegistroScreen() {
       if (cancelled) return;
       setExistingLog(log ?? null);
       setForm(log ? formFromLog(log) : emptyForm);
+      setIsDirty(false);
     });
     return () => {
       cancelled = true;
@@ -90,6 +108,27 @@ export function RegistroScreen() {
   const updateField = <K extends keyof FormState>(key: K, value: FormState[K]) => {
     setForm((prev) => ({ ...prev, [key]: value }));
     setSavedForDate(null);
+    setIsDirty(true);
+  };
+
+  const toggleArrayField = (key: 'triggerIds' | 'habitIds', id: number) => {
+    setForm((prev) => {
+      const current = prev[key];
+      const next = current.includes(id) ? current.filter((existingId) => existingId !== id) : [...current, id];
+      return { ...prev, [key]: next };
+    });
+    setSavedForDate(null);
+    setIsDirty(true);
+  };
+
+  const handleDateChange = (newDate: string) => {
+    if (isDirty) {
+      const confirmed = window.confirm(
+        'Tienes cambios sin guardar en este registro. Si cambiás de fecha se van a perder. ¿Continuar igual?',
+      );
+      if (!confirmed) return;
+    }
+    setDate(newDate);
   };
 
   const handleSubmit = async (event: FormEvent) => {
@@ -103,19 +142,19 @@ export function RegistroScreen() {
       maxHeartRate: toNumberOrUndefined(form.maxHeartRate),
       deviceUsed: form.deviceUsed.trim() || undefined,
       craving: form.craving,
-      // Los disparadores y hábitos se completan en el próximo sub-paso — se preservan si ya existían.
-      triggerIds: existingLog?.triggerIds ?? [],
+      triggerIds: form.triggerIds,
       sleepHours: toNumberOrUndefined(form.sleepHours),
       sleepQuality: form.sleepQuality,
       activityMinutes: toNumberOrUndefined(form.activityMinutes),
       activityType: form.activityType.trim() || undefined,
       energy: form.energy,
       mood: form.mood,
-      habitIds: existingLog?.habitIds ?? [],
+      habitIds: form.habitIds,
       notes: form.notes.trim() || undefined,
     });
 
     setSavedForDate(date);
+    setIsDirty(false);
   };
 
   const canSave = form.craving && form.sleepQuality && form.energy && form.mood;
@@ -125,7 +164,7 @@ export function RegistroScreen() {
       <h1 className="mb-4 text-xl font-semibold text-ink dark:text-ink-dark">Registro diario</h1>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5 pb-10">
-        <DateField label="Fecha" value={date} onChange={setDate} min={minDate} max={today} required />
+        <DateField label="Fecha" value={date} onChange={handleDateChange} min={minDate} max={today} required />
 
         {existingLog && (
           <p className="-mt-2 text-sm text-secondary">Ya existe un registro para este día, se va a actualizar.</p>
@@ -164,6 +203,13 @@ export function RegistroScreen() {
 
         <ScaleSelector label="Craving" value={form.craving} onChange={(value) => updateField('craving', value)} />
 
+        <CheckboxGroup
+          label="Disparadores"
+          options={triggers}
+          selectedIds={form.triggerIds}
+          onToggle={(id) => toggleArrayField('triggerIds', id)}
+        />
+
         <div className="grid grid-cols-2 gap-2">
           <TextField
             label="Horas de sueño"
@@ -198,6 +244,13 @@ export function RegistroScreen() {
 
         <ScaleSelector label="Energía" value={form.energy} onChange={(value) => updateField('energy', value)} />
         <ScaleSelector label="Ánimo" value={form.mood} onChange={(value) => updateField('mood', value)} />
+
+        <CheckboxGroup
+          label="Hábitos de apoyo cumplidos"
+          options={habits}
+          selectedIds={form.habitIds}
+          onToggle={(id) => toggleArrayField('habitIds', id)}
+        />
 
         <label className="flex flex-col gap-1 text-sm text-ink/80 dark:text-ink-dark/80">
           Notas
