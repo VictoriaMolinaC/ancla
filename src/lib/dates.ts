@@ -23,3 +23,9 @@ export function daysBetween(from: string, to: string): number {
   const msPerDay = 24 * 60 * 60 * 1000;
   return Math.round((fromDateKey(to).getTime() - fromDateKey(from).getTime()) / msPerDay);
 }
+
+/** Muestra una clave YYYY-MM-DD como DD-MM-YYYY (formato usado en Chile). */
+export function formatDateDisplay(dateKey: string): string {
+  const [year, month, day] = dateKey.split('-');
+  return `${day}-${month}-${year}`;
+}
