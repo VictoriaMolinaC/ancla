@@ -11,3 +11,15 @@ export function addDays(date: Date, days: number): Date {
   result.setDate(result.getDate() + days);
   return result;
 }
+
+/** Parsea una clave YYYY-MM-DD como fecha local (evita el corrimiento de un día que da `new Date(string)`, que asume UTC). */
+export function fromDateKey(dateKey: string): Date {
+  const [year, month, day] = dateKey.split('-').map(Number);
+  return new Date(year, month - 1, day);
+}
+
+/** Días de calendario entre dos claves YYYY-MM-DD (puede dar negativo si `to` es anterior a `from`). */
+export function daysBetween(from: string, to: string): number {
+  const msPerDay = 24 * 60 * 60 * 1000;
+  return Math.round((fromDateKey(to).getTime() - fromDateKey(from).getTime()) / msPerDay);
+}
