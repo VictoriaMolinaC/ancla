@@ -1,9 +1,9 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { type FormEvent, useState } from 'react';
 import { DateField } from '../components/forms/DateField';
+import { SubstanceRow } from '../components/substances/SubstanceRow';
 import { addSubstance, getSubstances } from '../db/repositories';
-import { formatDateDisplay, toDateKey } from '../lib/dates';
-import { getStreakDays } from '../lib/streak';
+import { toDateKey } from '../lib/dates';
 
 export function SustanciasScreen() {
   const substances = useLiveQuery(() => getSubstances());
@@ -54,18 +54,7 @@ export function SustanciasScreen() {
       {substances && substances.length > 0 && (
         <ul className="flex flex-col gap-2">
           {substances.map((substance) => (
-            <li
-              key={substance.id}
-              className="flex items-center justify-between rounded-lg border border-ink/10 px-4 py-3 dark:border-ink-dark/10"
-            >
-              <div>
-                <p className="font-medium text-ink dark:text-ink-dark">{substance.name}</p>
-                <p className="text-sm text-ink/60 dark:text-ink-dark/60">
-                  Última vez: {formatDateDisplay(substance.lastUseDate)}
-                </p>
-              </div>
-              <span className="text-sm font-medium text-primary">{getStreakDays(substance.lastUseDate)} días</span>
-            </li>
+            <SubstanceRow key={substance.id} substance={substance} />
           ))}
         </ul>
       )}
