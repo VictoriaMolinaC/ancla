@@ -21,3 +21,9 @@ export const deleteDailyLog = (id: number) => db.dailyLogs.delete(id);
 export const getDailyLogs = () => db.dailyLogs.orderBy('date').reverse().toArray();
 
 export const getDailyLogByDate = (date: string) => db.dailyLogs.where('date').equals(date).first();
+
+/** Fecha del registro diario más antiguo que exista (ej. datos de ejemplo), o undefined si no hay ninguno. */
+export async function getEarliestDailyLogDate(): Promise<string | undefined> {
+  const earliest = await db.dailyLogs.orderBy('date').first();
+  return earliest?.date;
+}
