@@ -35,3 +35,10 @@ body {
   font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* El ícono nativo del <input type="date"> se esconde acá, con CSS plano —
+   la variante arbitraria de Tailwind para este pseudo-elemento no prendía
+   de forma confiable. Usamos nuestro propio botón de calendario en su lugar. */
+.date-input::-webkit-calendar-picker-indicator {
+  display: none;
+}

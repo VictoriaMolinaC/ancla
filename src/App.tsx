@@ -7,11 +7,11 @@ import { PlaceholderScreen } from './components/layout/PlaceholderScreen';
 import { SupportButton } from './components/layout/SupportButton';
 import { SupportSheet } from './components/layout/SupportSheet';
 import { InicioScreen } from './screens/InicioScreen';
+import { SustanciasScreen } from './screens/SustanciasScreen';
 
-const PLACEHOLDER_MESSAGES: Record<Exclude<ScreenId, 'inicio'>, string> = {
+const PLACEHOLDER_MESSAGES: Record<Exclude<ScreenId, 'inicio' | 'sustancias'>, string> = {
   registro: 'Formulario de registro diario (próximo paso).',
   progreso: 'Historial, gráficas y correlaciones (más adelante).',
-  sustancias: 'Alta y edición de sustancias (más adelante).',
   ajustes: 'Contactos, listas editables y umbral de LPM (más adelante).',
 };
 
@@ -36,9 +36,9 @@ function App() {
         onClose={() => setDrawerOpen(false)}
       />
       <main>
-        {activeScreen === 'inicio' ? (
-          <InicioScreen onRegistrarHoy={() => setActiveScreen('registro')} />
-        ) : (
+        {activeScreen === 'inicio' && <InicioScreen onRegistrarHoy={() => setActiveScreen('registro')} />}
+        {activeScreen === 'sustancias' && <SustanciasScreen />}
+        {activeScreen !== 'inicio' && activeScreen !== 'sustancias' && (
           <PlaceholderScreen message={PLACEHOLDER_MESSAGES[activeScreen]} />
         )}
       </main>
