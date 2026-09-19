@@ -2,7 +2,7 @@
 export type Scale1to5 = 1 | 2 | 3 | 4 | 5;
 
 export interface Substance {
-  id?: number;
+  id: number;
   name: string;
   /** Fecha (ISO, YYYY-MM-DD) del último consumo — de acá se calcula la racha. */
   lastUseDate: string;
@@ -11,7 +11,7 @@ export interface Substance {
 }
 
 export interface DailyLog {
-  id?: number;
+  id: number;
   /** ISO YYYY-MM-DD, único: un registro por día. */
   date: string;
   restingHeartRate?: number;
@@ -35,7 +35,7 @@ export interface DailyLog {
 }
 
 export interface Contact {
-  id?: number;
+  id: number;
   name: string;
   phone?: string;
   relationship?: string;
@@ -44,7 +44,7 @@ export interface Contact {
 
 /** Ítem de una lista editable por el usuario (hábitos o disparadores). */
 export interface ListItem {
-  id?: number;
+  id: number;
   name: string;
   /** false = ya no se ofrece para nuevos registros, pero se conserva en el histórico. */
   active: boolean;
