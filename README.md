@@ -4,6 +4,8 @@ Acompaña el día a día de una persona en proceso de abstinencia de sustancias,
 
 > Progreso Sobrio no reemplaza atención médica ni psicológica profesional. Si estás en crisis, comunicate con la línea **1412** de SENDA (Chile), gratuita y confidencial las 24 horas.
 
+**Demo:** [progreso-sobrio.vercel.app](https://progreso-sobrio.vercel.app) — al abrirla por primera vez ves datos de ejemplo, para que puedas explorar la app antes de cargar los tuyos.
+
 ## Privacidad primero
 
 - **100% offline** una vez cargada, funciona sin conexión a internet.
@@ -27,6 +29,21 @@ Acompaña el día a día de una persona en proceso de abstinencia de sustancias,
 No encontramos una app chilena dedicada a esto, lo más cercano es la línea/chat 1412 de SENDA y "PlanSobrio", una app de encuentro social para gente sobria en Latinoamérica, pero con otro propósito (no es un tracker diario).
 
 Progreso Sobrio se diferencia por ser open source, una PWA instalable que funciona sin conexión, con profundidad real de correlación entre LPM, sueño, craving y ánimo, soporte para varias sustancias en paralelo, e integración directa con la red de apoyo chilena.
+
+## Capturas
+
+<table>
+<tr>
+<td><img src=".github/screenshots/inicio.png" width="240" alt="Pantalla de inicio con la racha de sobriedad"></td>
+<td><img src=".github/screenshots/registro-diario.png" width="240" alt="Formulario de registro diario"></td>
+<td><img src=".github/screenshots/graficas.png" width="240" alt="Gráficas de LPM, sueño y actividad"></td>
+</tr>
+<tr>
+<td><img src=".github/screenshots/calendario.png" width="240" alt="Calendario con los días registrados"></td>
+<td><img src=".github/screenshots/red-de-apoyo.png" width="240" alt="Panel de red de apoyo con la línea 1412 de SENDA"></td>
+<td><img src=".github/screenshots/habitos-dark.png" width="240" alt="Rachas por hábito, modo oscuro"></td>
+</tr>
+</table>
 
 ## Stack técnico
 
