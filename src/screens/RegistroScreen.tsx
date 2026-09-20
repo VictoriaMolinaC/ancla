@@ -71,10 +71,14 @@ function formFromLog(log: DailyLog): FormState {
 
 const toNumberOrUndefined = (value: string) => (value.trim() === '' ? undefined : Number(value));
 
-export function RegistroScreen() {
+interface RegistroScreenProps {
+  initialDate?: string;
+}
+
+export function RegistroScreen({ initialDate }: RegistroScreenProps) {
   const today = toDateKey(new Date());
   const [minDate, setMinDate] = useState<string | undefined>();
-  const [date, setDate] = useState(today);
+  const [date, setDate] = useState(initialDate ?? today);
   const [form, setForm] = useState<FormState>(emptyForm);
   const [existingLog, setExistingLog] = useState<DailyLog | null>(null);
   const [savedForDate, setSavedForDate] = useState<string | null>(null);
