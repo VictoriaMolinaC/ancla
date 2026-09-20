@@ -276,7 +276,7 @@ export function RegistroScreen({ initialDate }: RegistroScreenProps) {
             value={form.notes}
             onChange={(event) => updateField('notes', event.target.value)}
             rows={3}
-            className="w-full rounded-lg border border-ink/15 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+            className="w-full rounded-xl border border-ink/20 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
           />
         </label>
 

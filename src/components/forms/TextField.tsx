@@ -21,7 +21,7 @@ export function TextField({ label, value, onChange, type = 'text', placeholder, 
           placeholder={placeholder}
           step={step}
           min={min}
-          className="w-full rounded-lg border border-ink/15 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+          className="w-full rounded-xl border border-ink/20 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
         />
         {suffix && <span className="shrink-0 text-sm text-ink/50 dark:text-ink-dark/50">{suffix}</span>}
       </div>

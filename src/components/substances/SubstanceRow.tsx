@@ -37,14 +37,14 @@ export function SubstanceRow({ substance }: SubstanceRowProps) {
       <li>
         <form
           onSubmit={handleSave}
-          className="flex flex-col gap-3 rounded-lg border border-ink/10 p-4 dark:border-ink-dark/10"
+          className="flex flex-col gap-3 shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-xl border border-ink/15 p-4 dark:border-ink-dark/10"
         >
           <input
             type="text"
             value={name}
             onChange={(event) => setName(event.target.value)}
             required
-            className="rounded-lg border border-ink/15 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+            className="rounded-xl border border-ink/20 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
           />
           <DateField label="Última vez" value={lastUseDate} onChange={setLastUseDate} max={today} required />
 
@@ -58,7 +58,7 @@ export function SubstanceRow({ substance }: SubstanceRowProps) {
             <button
               type="button"
               onClick={() => setIsEditing(false)}
-              className="flex-1 rounded-full border border-ink/15 px-4 py-2 text-sm text-ink/80 dark:border-ink-dark/15 dark:text-ink-dark/80"
+              className="flex-1 rounded-full border border-ink/20 px-4 py-2 text-sm text-ink/80 dark:border-ink-dark/15 dark:text-ink-dark/80"
             >
               Cancelar
             </button>
@@ -73,7 +73,7 @@ export function SubstanceRow({ substance }: SubstanceRowProps) {
   }
 
   return (
-    <li className="flex items-center justify-between rounded-lg border border-ink/10 px-4 py-3 dark:border-ink-dark/10">
+    <li className="flex items-center justify-between shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-xl border border-ink/15 px-4 py-3 dark:border-ink-dark/10">
       <div>
         <p className="font-medium text-ink dark:text-ink-dark">{substance.name}</p>
         <p className="text-sm text-ink/60 dark:text-ink-dark/60">

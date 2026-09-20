@@ -26,7 +26,7 @@ export function HistorialList({ onEdit }: HistorialListProps) {
       {logs.map((log) => (
         <li
           key={log.id}
-          className="flex items-center justify-between rounded-lg border border-ink/10 px-4 py-3 dark:border-ink-dark/10"
+          className="flex items-center justify-between shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-xl border border-ink/15 px-4 py-3 dark:border-ink-dark/10"
         >
           <div>
             <p className="font-medium text-ink dark:text-ink-dark">{formatDateDisplay(log.date)}</p>

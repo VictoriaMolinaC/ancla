@@ -35,11 +35,11 @@ export function HrThresholdSection() {
             setValue(event.target.value);
             setSaved(false);
           }}
-          className="w-24 rounded-lg border border-ink/15 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+          className="w-24 rounded-xl border border-ink/20 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
         />
         <button
           type="submit"
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
+          className="rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
         >
           Guardar
         </button>

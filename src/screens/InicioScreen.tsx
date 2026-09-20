@@ -1,17 +1,21 @@
 import { useLiveQuery } from 'dexie-react-hooks';
+import { DemoDataBanner } from '../components/inicio/DemoDataBanner';
 import { StreakCard } from '../components/streak/StreakCard';
 import { getSubstances } from '../db/repositories';
 import { getStreakDays } from '../lib/streak';
 
 interface InicioScreenProps {
   onRegistrarHoy: () => void;
+  onGoToAjustes: () => void;
 }
 
-export function InicioScreen({ onRegistrarHoy }: InicioScreenProps) {
+export function InicioScreen({ onRegistrarHoy, onGoToAjustes }: InicioScreenProps) {
   const substances = useLiveQuery(() => getSubstances());
 
   return (
     <div className="flex flex-col items-center gap-6 px-4 py-8">
+      <DemoDataBanner onGoToAjustes={onGoToAjustes} />
+
       {substances && substances.length > 0 && (
         <div className="flex w-full flex-col items-center gap-4">
           {substances.map((substance) => (

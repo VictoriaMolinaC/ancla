@@ -22,7 +22,7 @@ export function SupportSheet({ open, onClose }: SupportSheetProps) {
 
         <a
           href={`tel:${SENDA_CONTACT.phone}`}
-          className="mb-3 flex items-center justify-between rounded-lg border border-secondary/30 bg-secondary/10 px-4 py-3"
+          className="mb-3 flex items-center justify-between rounded-xl border border-secondary/30 bg-secondary/10 px-4 py-3"
         >
           <span>
             <span className="block font-medium text-secondary">{SENDA_CONTACT.name}</span>
@@ -34,7 +34,7 @@ export function SupportSheet({ open, onClose }: SupportSheetProps) {
         {contacts && contacts.length > 0 ? (
           <ul className="flex flex-col gap-2">
             {contacts.map((contact) => (
-              <li key={contact.id} className="rounded-lg border border-ink/10 px-4 py-3 dark:border-ink-dark/10">
+              <li key={contact.id} className="shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-xl border border-ink/15 px-4 py-3 dark:border-ink-dark/10">
                 {contact.phone ? (
                   <a href={`tel:${contact.phone}`} className="flex items-center justify-between">
                     <span>
@@ -65,7 +65,7 @@ export function SupportSheet({ open, onClose }: SupportSheetProps) {
         <button
           type="button"
           onClick={onClose}
-          className="mt-4 w-full rounded-lg border border-ink/15 py-2 text-ink/80 dark:border-ink-dark/15 dark:text-ink-dark/80"
+          className="mt-4 w-full rounded-xl border border-ink/20 py-2 text-ink/80 dark:border-ink-dark/15 dark:text-ink-dark/80"
         >
           Cerrar
         </button>

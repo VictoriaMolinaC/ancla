@@ -45,7 +45,9 @@ function App() {
         onClose={() => setDrawerOpen(false)}
       />
       <main>
-        {activeScreen === 'inicio' && <InicioScreen onRegistrarHoy={handleRegistrarHoy} />}
+        {activeScreen === 'inicio' && (
+          <InicioScreen onRegistrarHoy={handleRegistrarHoy} onGoToAjustes={() => setActiveScreen('ajustes')} />
+        )}
         {activeScreen === 'sustancias' && <SustanciasScreen />}
         {activeScreen === 'registro' && <RegistroScreen initialDate={registroDate} />}
         {activeScreen === 'progreso' && <ProgresoScreen onEditDate={handleEditDate} theme={theme} />}

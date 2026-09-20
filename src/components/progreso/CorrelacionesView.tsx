@@ -27,7 +27,7 @@ export function CorrelacionesView() {
         {insights.map((insight) => (
           <li
             key={insight.text}
-            className="rounded-lg border border-ink/10 px-4 py-3 text-sm text-ink dark:border-ink-dark/10 dark:text-ink-dark"
+            className="shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-xl border border-ink/15 px-4 py-3 text-sm text-ink dark:border-ink-dark/10 dark:text-ink-dark"
           >
             {insight.text}
           </li>

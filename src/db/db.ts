@@ -1,7 +1,7 @@
 import Dexie, { type EntityTable } from 'dexie';
 import type { Substance, DailyLog, Contact, ListItem, Settings } from './types';
 
-const db = new Dexie('AnclaDB') as Dexie & {
+const db = new Dexie('ProgresoSobrioDB') as Dexie & {
   substances: EntityTable<Substance, 'id'>;
   dailyLogs: EntityTable<DailyLog, 'id'>;
   contacts: EntityTable<Contact, 'id'>;

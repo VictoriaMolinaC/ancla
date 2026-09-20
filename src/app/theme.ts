@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
-const STORAGE_KEY = 'ancla:theme';
+const STORAGE_KEY = 'progreso-sobrio:theme';
 
 function getInitialTheme(): Theme {
   return window.localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light';
