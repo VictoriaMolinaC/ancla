@@ -1,6 +1,7 @@
 import { useLiveQuery } from 'dexie-react-hooks';
 import { ContactsSection } from '../components/ajustes/ContactsSection';
 import { EditableListSection } from '../components/ajustes/EditableListSection';
+import { HrThresholdSection } from '../components/ajustes/HrThresholdSection';
 import { habitsRepo, triggersRepo } from '../db/repositories';
 
 export function AjustesScreen() {
@@ -25,6 +26,7 @@ export function AjustesScreen() {
         onRename={(id, name) => triggersRepo.rename(id, name)}
         onToggleActive={(id, active) => triggersRepo.setActive(id, active)}
       />
+      <HrThresholdSection />
     </div>
   );
 }
