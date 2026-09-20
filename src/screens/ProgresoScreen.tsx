@@ -1,7 +1,13 @@
-import { useState } from 'react';
+import { lazy, Suspense, useState } from 'react';
+import type { Theme } from '../app/theme';
 import { PlaceholderScreen } from '../components/layout/PlaceholderScreen';
 import { CalendarView } from '../components/progreso/CalendarView';
 import { HistorialList } from '../components/progreso/HistorialList';
+
+// Diferido: Recharts es pesado y la mayoría de las visitas van a Registro, no acá.
+const GraficasView = lazy(() =>
+  import('../components/progreso/GraficasView').then((module) => ({ default: module.GraficasView })),
+);
 
 type ProgresoTab = 'historial' | 'calendario' | 'graficas' | 'correlaciones';
 
@@ -12,16 +18,12 @@ const TABS: { id: ProgresoTab; label: string }[] = [
   { id: 'correlaciones', label: 'Qué te ayuda' },
 ];
 
-const PLACEHOLDER_MESSAGES: Record<Exclude<ProgresoTab, 'historial' | 'calendario'>, string> = {
-  graficas: 'Gráficas de LPM en reposo, sueño y actividad (más adelante).',
-  correlaciones: 'Panel de correlaciones simples (más adelante).',
-};
-
 interface ProgresoScreenProps {
   onEditDate: (date: string) => void;
+  theme: Theme;
 }
 
-export function ProgresoScreen({ onEditDate }: ProgresoScreenProps) {
+export function ProgresoScreen({ onEditDate, theme }: ProgresoScreenProps) {
   const [tab, setTab] = useState<ProgresoTab>('historial');
 
   return (
@@ -45,9 +47,12 @@ export function ProgresoScreen({ onEditDate }: ProgresoScreenProps) {
 
       {tab === 'historial' && <HistorialList onEdit={onEditDate} />}
       {tab === 'calendario' && <CalendarView onSelectDate={onEditDate} />}
-      {(tab === 'graficas' || tab === 'correlaciones') && (
-        <PlaceholderScreen message={PLACEHOLDER_MESSAGES[tab]} />
+      {tab === 'graficas' && (
+        <Suspense fallback={<p className="text-center text-ink/60 dark:text-ink-dark/60">Cargando gráficas…</p>}>
+          <GraficasView theme={theme} />
+        </Suspense>
       )}
+      {tab === 'correlaciones' && <PlaceholderScreen message="Panel de correlaciones simples (más adelante)." />}
     </div>
   );
 }
