@@ -1,6 +1,6 @@
 import { db } from './db';
 import { addDays, toDateKey } from '../lib/dates';
-import { getSetting, setSetting } from './repositories/settings';
+import { getSetting, setDemoSubstanceId, setSetting } from './repositories/settings';
 import type { DailyLog } from './types';
 
 const SEEDED_KEY = 'seeded';
@@ -32,11 +32,14 @@ export async function seedDatabaseIfEmpty(): Promise<void> {
         SAMPLE_TRIGGERS.map((name) => db.triggers.add({ name, active: true, createdAt: nowIso })),
       );
 
-      await db.substances.add({
+      const demoSubstanceId = await db.substances.add({
         name: 'Alcohol',
         lastUseDate: toDateKey(addDays(now, -15)),
         createdAt: nowIso,
       });
+      // Se guarda para poder avisar en Inicio que estos datos son de ejemplo,
+      // y dejar de avisarlo en cuanto esta sustancia ya no exista.
+      await setDemoSubstanceId(demoSubstanceId);
 
       await db.contacts.add({
         name: 'Camila (hermana)',

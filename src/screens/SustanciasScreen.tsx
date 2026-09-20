@@ -27,7 +27,7 @@ export function SustanciasScreen() {
 
       <form
         onSubmit={handleSubmit}
-        className="mb-6 flex flex-col gap-3 rounded-2xl bg-ink/[0.03] p-4 dark:bg-ink-dark/[0.05]"
+        className="mb-6 flex flex-col gap-3 shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-2xl bg-ink/[0.03] p-4 dark:bg-ink-dark/[0.05]"
       >
         <label className="flex flex-col gap-1 text-sm text-ink/80 dark:text-ink-dark/80">
           Nombre
@@ -37,7 +37,7 @@ export function SustanciasScreen() {
             onChange={(event) => setName(event.target.value)}
             placeholder="Ej: Alcohol, Tabaco, Cannabis"
             required
-            className="rounded-lg border border-ink/15 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+            className="rounded-xl border border-ink/20 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
           />
         </label>
 

@@ -25,7 +25,7 @@ export function DateField({ label, value, onChange, min, max, required }: DateFi
           min={min}
           max={max}
           required={required}
-          className="date-input w-full rounded-lg border border-ink/15 bg-base px-3 py-2 pr-10 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+          className="date-input w-full rounded-xl border border-ink/20 bg-base px-3 py-2 pr-10 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
         />
         <button
           type="button"

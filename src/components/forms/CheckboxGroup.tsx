@@ -26,7 +26,7 @@ export function CheckboxGroup({ label, options, selectedIds, onToggle }: Checkbo
               className={`rounded-full border px-3 py-1.5 text-sm transition-colors ${
                 selected
                   ? 'border-primary bg-primary text-white'
-                  : 'border-ink/15 text-ink/70 dark:border-ink-dark/15 dark:text-ink-dark/70'
+                  : 'border-ink/20 text-ink/70 dark:border-ink-dark/15 dark:text-ink-dark/70'
               }`}
             >
               {option.name}

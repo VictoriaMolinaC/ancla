@@ -6,51 +6,61 @@ export function ExportImportSection() {
   const [message, setMessage] = useState<string | null>(null);
 
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    event.target.value = '';
+    const input = event.target;
+    const file = input.files?.[0];
     if (!file) return;
 
     const confirmed = window.confirm(
-      'Importar va a REEMPLAZAR todos tus datos actuales (sustancias, registros, contactos, listas) por los del archivo. Esto no se puede deshacer. ¿Continuar?',
+      `Restaurar "${file.name}" va a REEMPLAZAR todos tus datos actuales (sustancias, registros, contactos, listas) por los del respaldo. Esto no se puede deshacer. ¿Continuar?`,
     );
-    if (!confirmed) return;
+
+    if (!confirmed) {
+      setMessage('Restauración cancelada — no se cambió nada.');
+      input.value = '';
+      return;
+    }
 
     try {
-      await importJson(file);
-      setMessage('Datos importados correctamente.');
+      const summary = await importJson(file);
+      setMessage(
+        `Restaurado desde "${file.name}": ${summary.substances} sustancia(s), ${summary.dailyLogs} registro(s) diario(s), ${summary.contacts} contacto(s), ${summary.habits} hábito(s) y ${summary.triggers} disparador(es).`,
+      );
     } catch (error) {
-      setMessage(error instanceof Error ? error.message : 'No se pudo importar el archivo.');
+      setMessage(error instanceof Error ? error.message : 'No se pudo restaurar el archivo.');
+    } finally {
+      // Se limpia recién acá para poder volver a elegir el mismo archivo después.
+      input.value = '';
     }
   };
 
   return (
     <section>
-      <h2 className="mb-3 text-lg font-semibold text-ink dark:text-ink-dark">Exportar / importar datos</h2>
+      <h2 className="mb-3 text-lg font-semibold text-ink dark:text-ink-dark">Respaldar y restaurar mis datos</h2>
       <p className="mb-3 text-sm text-ink/60 dark:text-ink-dark/60">
-        Tus datos viven solo en este navegador. Exportá seguido para tener un respaldo.
+        Tus datos viven solo en este navegador. Descargá un respaldo seguido, así no los perdés.
       </p>
 
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
           onClick={() => exportJson()}
-          className="rounded-lg border border-ink/15 px-4 py-2 text-sm text-ink dark:border-ink-dark/15 dark:text-ink-dark"
+          className="rounded-xl border border-ink/20 px-4 py-2 text-sm text-ink dark:border-ink-dark/15 dark:text-ink-dark"
         >
-          Exportar JSON (respaldo completo)
+          Descargar respaldo completo
         </button>
         <button
           type="button"
           onClick={() => exportCsv()}
-          className="rounded-lg border border-ink/15 px-4 py-2 text-sm text-ink dark:border-ink-dark/15 dark:text-ink-dark"
+          className="rounded-xl border border-ink/20 px-4 py-2 text-sm text-ink dark:border-ink-dark/15 dark:text-ink-dark"
         >
-          Exportar CSV (registros diarios)
+          Descargar mis registros (para Excel o Sheets)
         </button>
         <button
           type="button"
           onClick={() => fileInputRef.current?.click()}
-          className="rounded-lg border border-warning/40 px-4 py-2 text-sm text-warning"
+          className="rounded-xl border border-warning/40 px-4 py-2 text-sm text-warning"
         >
-          Importar JSON
+          Restaurar un respaldo
         </button>
         <input
           ref={fileInputRef}

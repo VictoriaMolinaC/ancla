@@ -54,7 +54,11 @@ function downloadBlob(content: string, filename: string, mimeType: string) {
 
 export async function exportJson(): Promise<void> {
   const data = await buildExport();
-  downloadBlob(JSON.stringify(data, null, 2), `ancla-datos-${data.exportedAt.slice(0, 10)}.json`, 'application/json');
+  downloadBlob(
+    JSON.stringify(data, null, 2),
+    `progreso-sobrio-datos-${data.exportedAt.slice(0, 10)}.json`,
+    'application/json',
+  );
 }
 
 function csvEscape(value: unknown): string {
@@ -109,11 +113,19 @@ export async function exportCsv(): Promise<void> {
   ]);
 
   const csv = [CSV_COLUMNS, ...rows].map((row) => row.map(csvEscape).join(',')).join('\n');
-  downloadBlob(csv, `ancla-registros-${toDateKey(new Date())}.csv`, 'text/csv');
+  downloadBlob(csv, `progreso-sobrio-registros-${toDateKey(new Date())}.csv`, 'text/csv');
+}
+
+export interface ImportSummary {
+  substances: number;
+  dailyLogs: number;
+  contacts: number;
+  habits: number;
+  triggers: number;
 }
 
 /** Reemplaza TODOS los datos actuales por los del archivo — es una restauración, no un merge. */
-export async function importJson(file: File): Promise<void> {
+export async function importJson(file: File): Promise<ImportSummary> {
   const text = await file.text();
   let data: unknown;
   try {
@@ -123,7 +135,7 @@ export async function importJson(file: File): Promise<void> {
   }
 
   if (!isValidExport(data)) {
-    throw new Error('El archivo no tiene el formato esperado de un respaldo de Ancla.');
+    throw new Error('El archivo no tiene el formato esperado de un respaldo de Progreso Sobrio.');
   }
 
   await db.transaction(
@@ -147,4 +159,16 @@ export async function importJson(file: File): Promise<void> {
       await setHrThreshold(data.hrThreshold ?? 100);
     },
   );
+
+  // Se cuenta contra la base ya escrita, no contra el archivo — así el mensaje
+  // refleja lo que realmente quedó guardado.
+  const [substances, dailyLogs, contacts, habits, triggers] = await Promise.all([
+    db.substances.count(),
+    db.dailyLogs.count(),
+    db.contacts.count(),
+    db.habits.count(),
+    db.triggers.count(),
+  ]);
+
+  return { substances, dailyLogs, contacts, habits, triggers };
 }

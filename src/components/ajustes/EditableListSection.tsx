@@ -49,11 +49,11 @@ export function EditableListSection({ title, items, onAdd, onRename, onToggleAct
           value={newName}
           onChange={(event) => setNewName(event.target.value)}
           placeholder="Agregar nuevo"
-          className="flex-1 rounded-lg border border-ink/15 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+          className="flex-1 rounded-xl border border-ink/20 bg-base px-3 py-2 text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
         />
         <button
           type="submit"
-          className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
+          className="rounded-xl bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
         >
           Agregar
         </button>
@@ -63,7 +63,7 @@ export function EditableListSection({ title, items, onAdd, onRename, onToggleAct
         {(items ?? []).map((item) => (
           <li
             key={item.id}
-            className="flex items-center justify-between rounded-lg border border-ink/10 px-4 py-2 dark:border-ink-dark/10"
+            className="flex items-center justify-between shadow-[0_2px_8px_rgba(62,58,54,0.08)] dark:shadow-none rounded-xl border border-ink/15 px-4 py-2 dark:border-ink-dark/10"
           >
             {editingId === item.id ? (
               <form onSubmit={(event) => handleRename(event, item.id)} className="flex flex-1 items-center gap-2">
@@ -72,7 +72,7 @@ export function EditableListSection({ title, items, onAdd, onRename, onToggleAct
                   value={editingName}
                   onChange={(event) => setEditingName(event.target.value)}
                   autoFocus
-                  className="flex-1 rounded-lg border border-ink/15 bg-base px-2 py-1 text-sm text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
+                  className="flex-1 rounded-xl border border-ink/20 bg-base px-2 py-1 text-sm text-ink dark:border-ink-dark/15 dark:bg-base-dark dark:text-ink-dark"
                 />
                 <button type="submit" className="text-sm text-primary">
                   Guardar
