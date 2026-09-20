@@ -6,6 +6,8 @@ import { Header } from './components/layout/Header';
 import { SupportButton } from './components/layout/SupportButton';
 import { SupportSheet } from './components/layout/SupportSheet';
 import { AjustesScreen } from './screens/AjustesScreen';
+import { DisparadoresScreen } from './screens/DisparadoresScreen';
+import { HabitosScreen } from './screens/HabitosScreen';
 import { InicioScreen } from './screens/InicioScreen';
 import { ProgresoScreen } from './screens/ProgresoScreen';
 import { RegistroScreen } from './screens/RegistroScreen';
@@ -47,6 +49,8 @@ function App() {
         {activeScreen === 'sustancias' && <SustanciasScreen />}
         {activeScreen === 'registro' && <RegistroScreen initialDate={registroDate} />}
         {activeScreen === 'progreso' && <ProgresoScreen onEditDate={handleEditDate} theme={theme} />}
+        {activeScreen === 'habitos' && <HabitosScreen />}
+        {activeScreen === 'disparadores' && <DisparadoresScreen />}
         {activeScreen === 'ajustes' && <AjustesScreen />}
       </main>
       <SupportButton onClick={() => setSupportOpen(true)} />

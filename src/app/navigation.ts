@@ -1,4 +1,4 @@
-export type ScreenId = 'inicio' | 'registro' | 'progreso' | 'sustancias' | 'ajustes';
+export type ScreenId = 'inicio' | 'registro' | 'progreso' | 'sustancias' | 'habitos' | 'disparadores' | 'ajustes';
 
 export interface NavItem {
   id: ScreenId;
@@ -10,5 +10,7 @@ export const NAV_ITEMS: NavItem[] = [
   { id: 'registro', label: 'Registro' },
   { id: 'progreso', label: 'Progreso' },
   { id: 'sustancias', label: 'Sustancias' },
+  { id: 'habitos', label: 'Hábitos' },
+  { id: 'disparadores', label: 'Disparadores' },
   { id: 'ajustes', label: 'Ajustes' },
 ];
