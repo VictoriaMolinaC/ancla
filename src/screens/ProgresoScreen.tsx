@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from 'react';
 import type { Theme } from '../app/theme';
-import { PlaceholderScreen } from '../components/layout/PlaceholderScreen';
 import { CalendarView } from '../components/progreso/CalendarView';
+import { CorrelacionesView } from '../components/progreso/CorrelacionesView';
 import { HistorialList } from '../components/progreso/HistorialList';
 
 // Diferido: Recharts es pesado y la mayoría de las visitas van a Registro, no acá.
@@ -52,7 +52,7 @@ export function ProgresoScreen({ onEditDate, theme }: ProgresoScreenProps) {
           <GraficasView theme={theme} />
         </Suspense>
       )}
-      {tab === 'correlaciones' && <PlaceholderScreen message="Panel de correlaciones simples (más adelante)." />}
+      {tab === 'correlaciones' && <CorrelacionesView />}
     </div>
   );
 }
