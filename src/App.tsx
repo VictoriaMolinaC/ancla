@@ -50,7 +50,7 @@ function App() {
         {activeScreen === 'inicio' && <InicioScreen onRegistrarHoy={handleRegistrarHoy} />}
         {activeScreen === 'sustancias' && <SustanciasScreen />}
         {activeScreen === 'registro' && <RegistroScreen initialDate={registroDate} />}
-        {activeScreen === 'progreso' && <ProgresoScreen onEditDate={handleEditDate} />}
+        {activeScreen === 'progreso' && <ProgresoScreen onEditDate={handleEditDate} theme={theme} />}
         {activeScreen === 'ajustes' && <PlaceholderScreen message={PLACEHOLDER_MESSAGES.ajustes} />}
       </main>
       <SupportButton onClick={() => setSupportOpen(true)} />
