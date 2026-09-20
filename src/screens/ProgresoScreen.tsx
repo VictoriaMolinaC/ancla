@@ -2,6 +2,7 @@ import { lazy, Suspense, useState } from 'react';
 import type { Theme } from '../app/theme';
 import { CalendarView } from '../components/progreso/CalendarView';
 import { CorrelacionesView } from '../components/progreso/CorrelacionesView';
+import { HabitStreaksView } from '../components/progreso/HabitStreaksView';
 import { HistorialList } from '../components/progreso/HistorialList';
 
 // Diferido: Recharts es pesado y la mayoría de las visitas van a Registro, no acá.
@@ -9,13 +10,14 @@ const GraficasView = lazy(() =>
   import('../components/progreso/GraficasView').then((module) => ({ default: module.GraficasView })),
 );
 
-type ProgresoTab = 'historial' | 'calendario' | 'graficas' | 'correlaciones';
+type ProgresoTab = 'historial' | 'calendario' | 'graficas' | 'correlaciones' | 'habitos';
 
 const TABS: { id: ProgresoTab; label: string }[] = [
   { id: 'historial', label: 'Historial' },
   { id: 'calendario', label: 'Calendario' },
   { id: 'graficas', label: 'Gráficas' },
   { id: 'correlaciones', label: 'Qué te ayuda' },
+  { id: 'habitos', label: 'Hábitos' },
 ];
 
 interface ProgresoScreenProps {
@@ -53,6 +55,7 @@ export function ProgresoScreen({ onEditDate, theme }: ProgresoScreenProps) {
         </Suspense>
       )}
       {tab === 'correlaciones' && <CorrelacionesView />}
+      {tab === 'habitos' && <HabitStreaksView />}
     </div>
   );
 }
