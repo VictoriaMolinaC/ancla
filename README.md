@@ -1,32 +1,54 @@
-# React + TypeScript + Vite
+# Progreso Sobrio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Acompaña el día a día de una persona en proceso de abstinencia de sustancias, sin juzgar, sin dar diagnósticos, un día a la vez.
 
-Currently, two official plugins are available:
+> Progreso Sobrio no reemplaza atención médica ni psicológica profesional. Si estás en crisis, comunicate con la línea **1412** de SENDA (Chile), gratuita y confidencial las 24 horas.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Privacidad primero
 
-## React Compiler
+- **100% offline** una vez cargada, funciona sin conexión a internet.
+- **Sin backend, sin servidor externo.** Todos los datos se guardan solo en tu navegador (IndexedDB).
+- **Sin analytics, sin llamadas de red con tus datos.** Nada sale de tu dispositivo.
+- Eres dueño de tus datos: podés exportarlos e importarlos cuando quieras.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Qué hace
 
-## Expanding the Oxlint configuration
+- **Racha de sobriedad** por sustancia , lo primero que ves al abrir la app, y podés tener varias en paralelo.
+- **Registro diario en menos de 30 segundos**: LPM en reposo, craving, sueño, actividad física, energía, ánimo, hábitos cumplidos, disparadores y notas.
+- **Historial** en tabla y calendario, editable.
+- **Gráficas** de LPM en reposo, sueño y actividad a lo largo del tiempo.
+- **Panel "Qué te ayuda"**: correlaciones simples en lenguaje llano, nunca un diagnóstico.
+- **Rachas de cumplimiento por hábito.**
+- **Exportar e importar** todos tus datos en JSON y CSV.
+- **Red de apoyo** siempre a un toque: tus propios contactos + la línea 1412 de SENDA.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+## Por qué existe
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+No encontramos una app chilena dedicada a esto, lo más cercano es la línea/chat 1412 de SENDA y "PlanSobrio", una app de encuentro social para gente sobria en Latinoamérica, pero con otro propósito (no es un tracker diario).
+
+Progreso Sobrio se diferencia por ser open source, una PWA instalable que funciona sin conexión, con profundidad real de correlación entre LPM, sueño, craving y ánimo, soporte para varias sustancias en paralelo, e integración directa con la red de apoyo chilena.
+
+## Stack técnico
+
+Vite + React + TypeScript, Tailwind CSS, [Dexie.js](https://dexie.org/) sobre IndexedDB para todo el almacenamiento local, y Recharts para las gráficas. Gestor de paquetes: pnpm.
+
+## Correr el proyecto localmente
+
+```bash
+git clone https://github.com/VictoriaMolinaC/progreso-sobrio.git
+cd progreso-sobrio
+pnpm install
+pnpm dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+## Cómo contribuir
+
+Mirá [CONTRIBUTING.md](./CONTRIBUTING.md) para el flujo de trabajo y cómo levantar el entorno.
+
+## Apoyar el proyecto
+
+Si Progreso Sobrio te sirve y puedes aportar, ayuda a sostener el proyecto.
+
+## Licencia
+
+[MIT](./LICENSE)

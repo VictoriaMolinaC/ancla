@@ -23,11 +23,7 @@ export function Header({ onMenuClick, theme, onToggleTheme }: HeaderProps) {
         </svg>
       </button>
 
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-accent">
-        <circle cx="12" cy="5" r="2" />
-        <path d="M12 7v13M8 12H4a8 8 0 0 0 8 8 8 8 0 0 0 8-8h-4M9 5H7M17 5h-2" />
-      </svg>
-      <span className="text-lg font-semibold text-ink dark:text-ink-dark">Ancla</span>
+      <span className="text-lg font-semibold text-ink dark:text-ink-dark">Progreso Sobrio</span>
 
       <ThemeToggle theme={theme} onToggle={onToggleTheme} />
     </header>
