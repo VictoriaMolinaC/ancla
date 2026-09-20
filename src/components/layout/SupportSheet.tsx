@@ -1,3 +1,5 @@
+import { useLiveQuery } from 'dexie-react-hooks';
+import { getContacts } from '../../db/repositories';
 import { SENDA_CONTACT } from '../../lib/constants';
 
 interface SupportSheetProps {
@@ -6,6 +8,8 @@ interface SupportSheetProps {
 }
 
 export function SupportSheet({ open, onClose }: SupportSheetProps) {
+  const contacts = useLiveQuery(() => getContacts());
+
   if (!open) return null;
 
   return (
@@ -27,9 +31,36 @@ export function SupportSheet({ open, onClose }: SupportSheetProps) {
           <span className="text-lg font-semibold text-secondary">{SENDA_CONTACT.phone}</span>
         </a>
 
-        <p className="text-sm text-ink/60 dark:text-ink-dark/60">
-          Tus propios contactos de apoyo van a aparecer acá una vez que los agregues en Ajustes.
-        </p>
+        {contacts && contacts.length > 0 ? (
+          <ul className="flex flex-col gap-2">
+            {contacts.map((contact) => (
+              <li key={contact.id} className="rounded-lg border border-ink/10 px-4 py-3 dark:border-ink-dark/10">
+                {contact.phone ? (
+                  <a href={`tel:${contact.phone}`} className="flex items-center justify-between">
+                    <span>
+                      <span className="block font-medium text-ink dark:text-ink-dark">{contact.name}</span>
+                      {contact.relationship && (
+                        <span className="block text-sm text-ink/60 dark:text-ink-dark/60">{contact.relationship}</span>
+                      )}
+                    </span>
+                    <span className="text-sm font-medium text-ink dark:text-ink-dark">{contact.phone}</span>
+                  </a>
+                ) : (
+                  <div>
+                    <span className="block font-medium text-ink dark:text-ink-dark">{contact.name}</span>
+                    {contact.relationship && (
+                      <span className="block text-sm text-ink/60 dark:text-ink-dark/60">{contact.relationship}</span>
+                    )}
+                  </div>
+                )}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-sm text-ink/60 dark:text-ink-dark/60">
+            Tus propios contactos de apoyo van a aparecer acá una vez que los agregues en Ajustes.
+          </p>
+        )}
 
         <button
           type="button"
