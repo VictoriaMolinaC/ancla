@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { PlaceholderScreen } from '../components/layout/PlaceholderScreen';
+import { CalendarView } from '../components/progreso/CalendarView';
 import { HistorialList } from '../components/progreso/HistorialList';
 
 type ProgresoTab = 'historial' | 'calendario' | 'graficas' | 'correlaciones';
@@ -11,8 +12,7 @@ const TABS: { id: ProgresoTab; label: string }[] = [
   { id: 'correlaciones', label: 'Qué te ayuda' },
 ];
 
-const PLACEHOLDER_MESSAGES: Record<Exclude<ProgresoTab, 'historial'>, string> = {
-  calendario: 'Vista de calendario (más adelante).',
+const PLACEHOLDER_MESSAGES: Record<Exclude<ProgresoTab, 'historial' | 'calendario'>, string> = {
   graficas: 'Gráficas de LPM en reposo, sueño y actividad (más adelante).',
   correlaciones: 'Panel de correlaciones simples (más adelante).',
 };
@@ -43,9 +43,9 @@ export function ProgresoScreen({ onEditDate }: ProgresoScreenProps) {
         ))}
       </div>
 
-      {tab === 'historial' ? (
-        <HistorialList onEdit={onEditDate} />
-      ) : (
+      {tab === 'historial' && <HistorialList onEdit={onEditDate} />}
+      {tab === 'calendario' && <CalendarView onSelectDate={onEditDate} />}
+      {(tab === 'graficas' || tab === 'correlaciones') && (
         <PlaceholderScreen message={PLACEHOLDER_MESSAGES[tab]} />
       )}
     </div>
