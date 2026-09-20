@@ -8,6 +8,7 @@ import { getFirstUsedDate } from '../db/init';
 import {
   getDailyLogByDate,
   getEarliestDailyLogDate,
+  getHrThreshold,
   habitsRepo,
   triggersRepo,
   upsertDailyLog,
@@ -78,6 +79,7 @@ export function RegistroScreen() {
   const [existingLog, setExistingLog] = useState<DailyLog | null>(null);
   const [savedForDate, setSavedForDate] = useState<string | null>(null);
   const [isDirty, setIsDirty] = useState(false);
+  const [hrWarningMessage, setHrWarningMessage] = useState<string | null>(null);
   const saved = savedForDate === date;
   const triggers = useLiveQuery(() => triggersRepo.getActive()) ?? [];
   const habits = useLiveQuery(() => habitsRepo.getActive()) ?? [];
@@ -152,6 +154,18 @@ export function RegistroScreen() {
       habitIds: form.habitIds,
       notes: form.notes.trim() || undefined,
     });
+
+    const restingValue = toNumberOrUndefined(form.restingHeartRate);
+    if (restingValue !== undefined) {
+      const threshold = await getHrThreshold();
+      setHrWarningMessage(
+        restingValue > threshold
+          ? `Tu LPM en reposo (${restingValue}) superó tu umbral configurado (${threshold}). Puede ser buena idea prestarle atención.`
+          : null,
+      );
+    } else {
+      setHrWarningMessage(null);
+    }
 
     setSavedForDate(date);
     setIsDirty(false);
@@ -271,6 +285,7 @@ export function RegistroScreen() {
         </button>
 
         {saved && <p className="text-center text-sm text-success">Guardado ✓</p>}
+        {saved && hrWarningMessage && <p className="text-center text-sm text-warning">{hrWarningMessage}</p>}
         {!canSave && (
           <p className="text-center text-sm text-ink/50 dark:text-ink-dark/50">
             Faltan craving, sueño, energía o ánimo para guardar.
