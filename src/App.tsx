@@ -3,17 +3,13 @@ import type { ScreenId } from './app/navigation';
 import { useTheme } from './app/theme';
 import { Drawer } from './components/layout/Drawer';
 import { Header } from './components/layout/Header';
-import { PlaceholderScreen } from './components/layout/PlaceholderScreen';
 import { SupportButton } from './components/layout/SupportButton';
 import { SupportSheet } from './components/layout/SupportSheet';
+import { AjustesScreen } from './screens/AjustesScreen';
 import { InicioScreen } from './screens/InicioScreen';
 import { ProgresoScreen } from './screens/ProgresoScreen';
 import { RegistroScreen } from './screens/RegistroScreen';
 import { SustanciasScreen } from './screens/SustanciasScreen';
-
-const PLACEHOLDER_MESSAGES: Record<Exclude<ScreenId, 'inicio' | 'sustancias' | 'registro' | 'progreso'>, string> = {
-  ajustes: 'Contactos, listas editables y umbral de LPM (más adelante).',
-};
 
 function App() {
   const [activeScreen, setActiveScreen] = useState<ScreenId>('inicio');
@@ -51,7 +47,7 @@ function App() {
         {activeScreen === 'sustancias' && <SustanciasScreen />}
         {activeScreen === 'registro' && <RegistroScreen initialDate={registroDate} />}
         {activeScreen === 'progreso' && <ProgresoScreen onEditDate={handleEditDate} theme={theme} />}
-        {activeScreen === 'ajustes' && <PlaceholderScreen message={PLACEHOLDER_MESSAGES.ajustes} />}
+        {activeScreen === 'ajustes' && <AjustesScreen />}
       </main>
       <SupportButton onClick={() => setSupportOpen(true)} />
       <SupportSheet open={supportOpen} onClose={() => setSupportOpen(false)} />
