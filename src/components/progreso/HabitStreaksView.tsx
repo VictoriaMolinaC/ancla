@@ -27,7 +27,7 @@ export function HabitStreaksView() {
           >
             <span className="font-medium text-ink dark:text-ink-dark">{habit.name}</span>
             <span className="text-sm font-medium text-success">
-              {streak} {streak === 1 ? 'día' : 'días'} seguidos
+              {streak} {streak === 1 ? 'día seguido' : 'días seguidos'}
             </span>
           </li>
         );
