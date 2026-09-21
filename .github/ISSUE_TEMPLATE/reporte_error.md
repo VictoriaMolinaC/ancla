@@ -2,7 +2,7 @@
 name: Reporte de error
 about: Contanos algo que no funciona como debería
 title: "[Error]: "
-labels: bug
+labels: error
 ---
 
 ## Qué pasó
