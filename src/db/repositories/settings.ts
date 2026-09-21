@@ -30,3 +30,14 @@ export const setDemoSubstanceId = (id: number) => setSetting(DEMO_SUBSTANCE_ID_K
 export const isDemoBannerDismissed = () => getSetting<boolean>(DEMO_BANNER_DISMISSED_KEY, false);
 
 export const dismissDemoBanner = () => setSetting(DEMO_BANNER_DISMISSED_KEY, true);
+
+const AGE_CONFIRMED_KEY = 'ageConfirmed';
+
+/**
+ * Confirmación de mayoría de edad. Al vivir en `settings` sobrevive a "borrar
+ * todos mis datos" a propósito: la persona sigue siendo mayor de edad, volver
+ * a preguntárselo no aporta nada.
+ */
+export const isAgeConfirmed = () => getSetting<boolean>(AGE_CONFIRMED_KEY, false);
+
+export const confirmAge = () => setSetting(AGE_CONFIRMED_KEY, true);

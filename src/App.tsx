@@ -1,3 +1,4 @@
+import { useLiveQuery } from 'dexie-react-hooks';
 import { useState } from 'react';
 import type { ScreenId } from './app/navigation';
 import { useTheme } from './app/theme';
@@ -5,6 +6,8 @@ import { Drawer } from './components/layout/Drawer';
 import { Header } from './components/layout/Header';
 import { SupportButton } from './components/layout/SupportButton';
 import { SupportSheet } from './components/layout/SupportSheet';
+import { AgeGate } from './components/onboarding/AgeGate';
+import { confirmAge, isAgeConfirmed } from './db/repositories';
 import { AjustesScreen } from './screens/AjustesScreen';
 import { DisparadoresScreen } from './screens/DisparadoresScreen';
 import { HabitosScreen } from './screens/HabitosScreen';
@@ -19,6 +22,7 @@ function App() {
   const [supportOpen, setSupportOpen] = useState(false);
   const [registroDate, setRegistroDate] = useState<string | undefined>();
   const { theme, toggleTheme } = useTheme();
+  const ageConfirmed = useLiveQuery(() => isAgeConfirmed());
 
   const handleSelectScreen = (screen: ScreenId) => {
     setActiveScreen(screen);
@@ -34,6 +38,12 @@ function App() {
     setRegistroDate(date);
     setActiveScreen('registro');
   };
+
+  // Mientras Dexie responde no se muestra nada, así quien ya confirmó no ve
+  // aparecer y desaparecer la puerta de edad en cada arranque.
+  if (ageConfirmed === undefined) return <div className="min-h-screen bg-base dark:bg-base-dark" />;
+
+  if (!ageConfirmed) return <AgeGate onConfirm={() => confirmAge()} />;
 
   return (
     <div className="min-h-screen bg-base dark:bg-base-dark">
