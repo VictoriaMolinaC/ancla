@@ -5,6 +5,23 @@ export function ExportImportSection() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [message, setMessage] = useState<string | null>(null);
 
+  /**
+   * Sin este wrapper, un fallo al exportar se perdía como promesa rechazada sin
+   * capturar: la persona apretaba el botón y no pasaba absolutamente nada, sin
+   * forma de distinguir un error del código de una descarga bloqueada por el
+   * navegador.
+   */
+  const handleExport = async (run: () => Promise<string>) => {
+    try {
+      const filename = await run();
+      setMessage(`Respaldo generado: ${filename}. Si no aparece en tus descargas, tu navegador la bloqueó.`);
+    } catch (error) {
+      setMessage(
+        error instanceof Error ? `No se pudo generar el respaldo: ${error.message}` : 'No se pudo generar el respaldo.',
+      );
+    }
+  };
+
   const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
     const input = event.target;
     const file = input.files?.[0];
@@ -43,14 +60,14 @@ export function ExportImportSection() {
       <div className="flex flex-wrap gap-2">
         <button
           type="button"
-          onClick={() => exportJson()}
+          onClick={() => handleExport(exportJson)}
           className="rounded-xl border border-ink/20 px-4 py-2 text-sm text-ink dark:border-ink-dark/15 dark:text-ink-dark"
         >
           Descargar respaldo completo
         </button>
         <button
           type="button"
-          onClick={() => exportCsv()}
+          onClick={() => handleExport(exportCsv)}
           className="rounded-xl border border-ink/20 px-4 py-2 text-sm text-ink dark:border-ink-dark/15 dark:text-ink-dark"
         >
           Descargar mis registros (para Excel o Sheets)

@@ -49,16 +49,20 @@ function downloadBlob(content: string, filename: string, mimeType: string) {
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
-  URL.revokeObjectURL(url);
+
+  // El revoke va diferido a propósito: `click()` solo agenda la descarga, así
+  // que revocar en el mismo tick puede invalidar la URL antes de que el
+  // navegador alcance a leerla. Chrome copia el blob y lo tolera; otros
+  // motores no, y la descarga falla en silencio.
+  setTimeout(() => URL.revokeObjectURL(url), 10_000);
 }
 
-export async function exportJson(): Promise<void> {
+/** Devuelve el nombre del archivo generado, para poder confirmarlo en la UI. */
+export async function exportJson(): Promise<string> {
   const data = await buildExport();
-  downloadBlob(
-    JSON.stringify(data, null, 2),
-    `progreso-sobrio-datos-${data.exportedAt.slice(0, 10)}.json`,
-    'application/json',
-  );
+  const filename = `progreso-sobrio-datos-${data.exportedAt.slice(0, 10)}.json`;
+  downloadBlob(JSON.stringify(data, null, 2), filename, 'application/json');
+  return filename;
 }
 
 function csvEscape(value: unknown): string {
@@ -84,7 +88,7 @@ const CSV_COLUMNS = [
   'notas',
 ];
 
-export async function exportCsv(): Promise<void> {
+export async function exportCsv(): Promise<string> {
   const [dailyLogs, habits, triggers] = await Promise.all([
     db.dailyLogs.orderBy('date').toArray(),
     db.habits.toArray(),
@@ -113,7 +117,9 @@ export async function exportCsv(): Promise<void> {
   ]);
 
   const csv = [CSV_COLUMNS, ...rows].map((row) => row.map(csvEscape).join(',')).join('\n');
-  downloadBlob(csv, `progreso-sobrio-registros-${toDateKey(new Date())}.csv`, 'text/csv');
+  const filename = `progreso-sobrio-registros-${toDateKey(new Date())}.csv`;
+  downloadBlob(csv, filename, 'text/csv');
+  return filename;
 }
 
 export interface ImportSummary {
