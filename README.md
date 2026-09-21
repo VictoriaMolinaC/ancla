@@ -2,7 +2,7 @@
 
 Acompaña el día a día de una persona en proceso de abstinencia de sustancias, sin juzgar, sin dar diagnósticos, un día a la vez.
 
-> Progreso Sobrio no reemplaza atención médica ni psicológica profesional. Si estás en crisis, comunicate con la línea **1412** de SENDA (Chile), gratuita y confidencial las 24 horas.
+> Progreso Sobrio es para personas mayores de 18 años y no reemplaza atención médica ni psicológica profesional. Si estás en crisis, comunicate con la línea **1412** de SENDA (Chile), gratuita y confidencial las 24 horas.
 
 **Demo:** [progreso-sobrio.vercel.app](https://progreso-sobrio.vercel.app) — al abrirla por primera vez ves datos de ejemplo, para que puedas explorar la app antes de cargar los tuyos.
 
@@ -31,6 +31,13 @@ No encontramos una app chilena dedicada a esto, lo más cercano es la línea/cha
 Progreso Sobrio se diferencia por ser open source, una PWA instalable que funciona sin conexión, con profundidad real de correlación entre LPM, sueño, craving y ánimo, soporte para varias sustancias en paralelo, e integración directa con la red de apoyo chilena.
 
 ## Capturas
+
+Lo primero al abrir: confirmar mayoría de edad. Quien declara ser menor no queda en un callejón sin salida, se le muestra la línea 1412.
+
+<p align="center">
+<img src=".github/screenshots/puerta-edad.png" width="240" alt="Pantalla de confirmación de mayoría de edad, modo claro">
+<img src=".github/screenshots/puerta-edad-dark.png" width="240" alt="Pantalla de confirmación de mayoría de edad, modo oscuro">
+</p>
 
 <table>
 <tr>
