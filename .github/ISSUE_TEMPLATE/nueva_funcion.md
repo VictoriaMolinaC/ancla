@@ -2,7 +2,7 @@
 name: Nueva función o mejora
 about: Proponé una idea para el proyecto
 title: "[Idea]: "
-labels: enhancement
+labels: mejora
 ---
 
 > Progreso Sobrio es 100% offline: sin backend, sin llamadas de red con datos
