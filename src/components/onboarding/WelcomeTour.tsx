@@ -16,8 +16,9 @@ interface TourCard {
 }
 
 // Mismos trazos (stroke, 24x24) que el resto de la app, para que se sientan
-// parte del mismo sistema y no íconos de relleno.
-const FLAME_PATH = 'M12 2c1 3-2 4-2 7a4 4 0 0 0 8 0c0-1-.5-2-1-3 1 0 2 1 2 3a7 7 0 1 1-14 0c0-4 3-5 4-9 1 1 2 1 3 2Z';
+// parte del mismo sistema y no íconos de relleno. El escudo es el mismo que
+// usa AgeGate en "Antes de entrar" (misma pantalla de entrada, mismo tema).
+const SHIELD_PATH = 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z';
 const HEART_PATH = 'M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z';
 
 function Icon({ children }: { children: React.ReactNode }) {
@@ -35,7 +36,7 @@ const CARDS: TourCard[] = [
     color: 'bg-primary',
     icon: (
       <Icon>
-        <path d={FLAME_PATH} />
+        <path d={SHIELD_PATH} />
       </Icon>
     ),
   },
@@ -78,8 +79,10 @@ const CARDS: TourCard[] = [
  * que el drawer no explica por sí solo: qué diferencia a "Registro" de
  * "Progreso", y que el botón flotante no es solo un adorno.
  *
- * El corazón de la última tarjeta es a propósito el mismo ícono (y el mismo
- * color) que el botón flotante real: cuando lo vean después, ya lo reconocen.
+ * Dos íconos se repiten a propósito, para que el usuario los reconozca cuando
+ * los vuelva a ver: el escudo de "Bienvenida" es el mismo que AgeGate usa en
+ * "Antes de entrar" (misma pantalla de entrada), y el corazón de "Red de
+ * apoyo" es el mismo ícono y color que el botón flotante real.
  */
 export function WelcomeTour({ onFinish, theme, onToggleTheme }: WelcomeTourProps) {
   const [step, setStep] = useState(0);
