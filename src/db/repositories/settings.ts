@@ -41,3 +41,14 @@ const AGE_CONFIRMED_KEY = 'ageConfirmed';
 export const isAgeConfirmed = () => getSetting<boolean>(AGE_CONFIRMED_KEY, false);
 
 export const confirmAge = () => setSetting(AGE_CONFIRMED_KEY, true);
+
+const ONBOARDING_SEEN_KEY = 'onboardingSeen';
+
+/**
+ * Tour de bienvenida ya visto. Vive en `settings`, así que sobrevive a
+ * "borrar todos mis datos" a propósito: quien ya sabe usar la app no
+ * necesita que se lo vuelvan a explicar solo porque reinició sus datos.
+ */
+export const isOnboardingSeen = () => getSetting<boolean>(ONBOARDING_SEEN_KEY, false);
+
+export const markOnboardingSeen = () => setSetting(ONBOARDING_SEEN_KEY, true);

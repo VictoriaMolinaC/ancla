@@ -7,7 +7,8 @@ import { Header } from './components/layout/Header';
 import { SupportButton } from './components/layout/SupportButton';
 import { SupportSheet } from './components/layout/SupportSheet';
 import { AgeGate } from './components/onboarding/AgeGate';
-import { confirmAge, isAgeConfirmed } from './db/repositories';
+import { WelcomeTour } from './components/onboarding/WelcomeTour';
+import { confirmAge, isAgeConfirmed, isOnboardingSeen, markOnboardingSeen } from './db/repositories';
 import { AjustesScreen } from './screens/AjustesScreen';
 import { DisparadoresScreen } from './screens/DisparadoresScreen';
 import { HabitosScreen } from './screens/HabitosScreen';
@@ -23,6 +24,7 @@ function App() {
   const [registroDate, setRegistroDate] = useState<string | undefined>();
   const { theme, toggleTheme } = useTheme();
   const ageConfirmed = useLiveQuery(() => isAgeConfirmed());
+  const onboardingSeen = useLiveQuery(() => isOnboardingSeen());
 
   const handleSelectScreen = (screen: ScreenId) => {
     setActiveScreen(screen);
@@ -43,7 +45,16 @@ function App() {
   // aparecer y desaparecer la puerta de edad en cada arranque.
   if (ageConfirmed === undefined) return <div className="min-h-screen bg-base dark:bg-base-dark" />;
 
-  if (!ageConfirmed) return <AgeGate onConfirm={() => confirmAge()} />;
+  if (!ageConfirmed) {
+    return <AgeGate onConfirm={() => confirmAge()} theme={theme} onToggleTheme={toggleTheme} />;
+  }
+
+  // Mismo motivo que arriba: no parpadear el tour mientras Dexie responde.
+  if (onboardingSeen === undefined) return <div className="min-h-screen bg-base dark:bg-base-dark" />;
+
+  if (!onboardingSeen) {
+    return <WelcomeTour onFinish={() => markOnboardingSeen()} theme={theme} onToggleTheme={toggleTheme} />;
+  }
 
   return (
     <div className="min-h-screen bg-base dark:bg-base-dark">
