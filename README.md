@@ -44,6 +44,19 @@ Lo primero al abrir: confirmar mayoría de edad. Quien declara ser menor no qued
 <img src=".github/screenshots/puerta-edad-dark.png" width="240" alt="Pantalla de confirmación de mayoría de edad, modo oscuro">
 </p>
 
+Después, un tour de 4 tarjetas explica dónde está cada cosa antes de entrar a la app.
+
+<table>
+<tr>
+<td><img src=".github/screenshots/tour-bienvenida.png" width="240" alt="Tour de bienvenida, primera tarjeta"></td>
+<td><img src=".github/screenshots/tour-registro.png" width="240" alt="Tour de bienvenida, tarjeta de registro diario"></td>
+</tr>
+<tr>
+<td><img src=".github/screenshots/tour-progreso.png" width="240" alt="Tour de bienvenida, tarjeta de progreso"></td>
+<td><img src=".github/screenshots/tour-apoyo.png" width="240" alt="Tour de bienvenida, tarjeta de red de apoyo"></td>
+</tr>
+</table>
+
 <table>
 <tr>
 <td><img src=".github/screenshots/inicio.png" width="240" alt="Pantalla de inicio con la racha de sobriedad"></td>
