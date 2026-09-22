@@ -9,6 +9,19 @@ interface AgeGateProps {
   onToggleTheme: () => void;
 }
 
+// Mismo trazo (24x24, stroke) que el resto de la app. El corazón es el mismo
+// ícono y color que la tarjeta "Red de apoyo" del tour y que el botón
+// flotante real: se repite a propósito cada vez que aparece la línea SENDA.
+function Icon({ children, color }: { children: React.ReactNode; color: string }) {
+  return (
+    <div className={`mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full text-white ${color}`}>
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {children}
+      </svg>
+    </div>
+  );
+}
+
 /**
  * Puerta de entrada: pide confirmar mayoría de edad antes de mostrar la app.
  * Es una autodeclaración, no una verificación.
@@ -39,7 +52,10 @@ export function AgeGate({ onConfirm, theme, onToggleTheme }: AgeGateProps) {
       <div className="mt-6 w-full max-w-sm rounded-2xl bg-base p-6 shadow-[0_4px_16px_rgba(62,58,54,0.12)] dark:border dark:border-ink-dark/10 dark:bg-base-dark dark:shadow-none">
         {underage ? (
           <>
-            <h2 className="text-lg font-semibold text-ink dark:text-ink-dark">Esta app es para mayores de 18</h2>
+            <Icon color="bg-secondary">
+              <path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 0 0-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 0 0 0-7.8Z" />
+            </Icon>
+            <h2 className="text-center text-lg font-semibold text-ink dark:text-ink-dark">Esta app es para mayores de 18</h2>
             <p className="mt-3 text-sm text-ink/80 dark:text-ink-dark/80">
               Que seas menor de edad no significa que no haya ayuda para vos. La línea 1412 de SENDA es gratuita,
               confidencial y atiende a cualquier edad, las 24 horas.
@@ -66,7 +82,10 @@ export function AgeGate({ onConfirm, theme, onToggleTheme }: AgeGateProps) {
           </>
         ) : (
           <>
-            <h2 className="text-lg font-semibold text-ink dark:text-ink-dark">Antes de entrar</h2>
+            <Icon color="bg-primary">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z" />
+            </Icon>
+            <h2 className="text-center text-lg font-semibold text-ink dark:text-ink-dark">Antes de entrar</h2>
             <p className="mt-3 text-sm text-ink/80 dark:text-ink-dark/80">
               Progreso Sobrio acompaña a personas mayores de edad en proceso de abstinencia de sustancias. No reemplaza
               atención médica ni psicológica profesional.

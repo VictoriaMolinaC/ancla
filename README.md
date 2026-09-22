@@ -15,6 +15,7 @@ Acompaña el día a día de una persona en proceso de abstinencia de sustancias,
 
 ## Qué hace
 
+- **Tour de bienvenida**, una sola vez, antes de entrar por primera vez: te explica en 4 tarjetas cortas dónde está el registro diario, dónde ver tu progreso, y que tu red de apoyo está siempre a un toque.
 - **Racha de sobriedad** por sustancia , lo primero que ves al abrir la app, y podés tener varias en paralelo.
 - **Registro diario en menos de 30 segundos**: LPM en reposo, craving, sueño, actividad física, energía, ánimo, hábitos cumplidos, disparadores y notas.
 - **Historial** en tabla y calendario, editable.
