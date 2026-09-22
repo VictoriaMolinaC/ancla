@@ -1,8 +1,12 @@
 import { useState } from 'react';
+import type { Theme } from '../../app/theme';
 import { SENDA_CONTACT } from '../../lib/constants';
+import { ThemeToggle } from '../layout/ThemeToggle';
 
 interface AgeGateProps {
   onConfirm: () => void;
+  theme: Theme;
+  onToggleTheme: () => void;
 }
 
 /**
@@ -13,7 +17,7 @@ interface AgeGateProps {
  * línea 1412, que atiende a cualquier edad. Es una app de salud, negar la
  * entrada no puede significar negar la ayuda.
  */
-export function AgeGate({ onConfirm }: AgeGateProps) {
+export function AgeGate({ onConfirm, theme, onToggleTheme }: AgeGateProps) {
   const [underage, setUnderage] = useState(false);
 
   // El degradado va en sRGB sobre un fondo opaco a propósito: en oklab (el
@@ -21,7 +25,10 @@ export function AgeGate({ onConfirm }: AgeGateProps) {
   // gris, y sin color de fondo compondría contra el lienzo del navegador, que
   // sigue al sistema y no al tema elegido acá.
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-base bg-linear-to-b/srgb from-primary/20 via-base to-base p-4 dark:bg-base-dark dark:from-primary/25 dark:via-base-dark dark:to-base-dark">
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-base bg-linear-to-b/srgb from-primary/20 via-base to-base p-4 dark:bg-base-dark dark:from-primary/25 dark:via-base-dark dark:to-base-dark">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle theme={theme} onToggle={onToggleTheme} />
+      </div>
       <img
         src="/favicon.svg"
         alt=""
