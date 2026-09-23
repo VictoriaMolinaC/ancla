@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { NAV_ITEMS, type ScreenId } from '../../app/navigation';
 
 interface DrawerProps {
@@ -8,6 +9,17 @@ interface DrawerProps {
 }
 
 export function Drawer({ open, activeScreen, onSelect, onClose }: DrawerProps) {
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
+
   return (
     <>
       <div
