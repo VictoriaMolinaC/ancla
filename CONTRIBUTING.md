@@ -18,6 +18,9 @@ Elijas lo que elijas, el flujo es el mismo: trabajás sobre una rama y abrís un
 
 1. Forkeá el repo y creá una rama para tu cambio.
 2. Hacé el cambio, con commits claros que expliquen el porqué, no solo el qué.
+   Si tu cambio agrega un archivo nuevo, usá `git add <archivo>` (o `git add -A`)
+   antes de commitear — `git commit -am` solo incluye cambios en archivos que
+   git ya venía rastreando, y se salta en silencio los archivos nuevos.
 3. Antes de abrir el PR, corré localmente:
    ```bash
    pnpm lint
@@ -29,6 +32,14 @@ Elijas lo que elijas, el flujo es el mismo: trabajás sobre una rama y abrís un
 > **Nota sobre coautoría:** si dos personas trabajaron juntas en un mismo cambio,
 > incluyan una línea `Co-authored-by: Nombre <email>` al final del mensaje del
 > commit para dar crédito a ambas. GitHub reconoce así la contribución conjunta.
+>
+> Dos detalles que importan en la práctica:
+> - El mail tiene que estar vinculado a la cuenta de GitHub de esa persona (el
+>   de su perfil, o su alias `ID+usuario@users.noreply.github.com`). Con
+>   cualquier otro mail, GitHub no puede asociar el commit a esa cuenta.
+> - Si te pasan esa línea por WhatsApp, Discord o algo así, **verificá que los
+>   símbolos `<` y `>` sigan ahí** antes de commitear — algunas apps de chat
+>   los borran al interpretarlos como una etiqueta HTML.
 
 ## Correr el proyecto localmente
 
