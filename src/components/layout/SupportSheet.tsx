@@ -1,4 +1,5 @@
 import { useLiveQuery } from 'dexie-react-hooks';
+import { useEffect } from 'react';
 import { getContacts } from '../../db/repositories';
 import { SENDA_CONTACT } from '../../lib/constants';
 
@@ -9,6 +10,17 @@ interface SupportSheetProps {
 
 export function SupportSheet({ open, onClose }: SupportSheetProps) {
   const contacts = useLiveQuery(() => getContacts());
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open, onClose]);
 
   if (!open) return null;
 
