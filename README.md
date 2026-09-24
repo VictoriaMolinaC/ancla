@@ -35,7 +35,8 @@ Progreso Sobrio se diferencia por ser open source, una PWA instalable que funcio
 
 Recorrido de 30 segundos por la app: puerta de edad, paneles, registros y gráficas.
 
-https://github.com/user-attachments/assets/3f8c58a5-a9a5-4faf-861f-88c1170a2c2a
+https://github.com/user-attachments/assets/80c0d663-ca59-4575-95fd-866ea09e65de
+
 
 Lo primero al abrir: confirmar mayoría de edad. Quien declara ser menor de edad le muestra la línea 1412.
 
