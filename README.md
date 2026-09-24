@@ -89,7 +89,11 @@ Lee detalladamente el documento [CONTRIBUTING.md](./CONTRIBUTING.md) para el flu
 
 ## Apoyar el proyecto
 
-Si Progreso Sobrio te sirve y puedes aportar, ayudas a sostener el proyecto.Basta con una estrella o incluir discusiones.
+Si Progreso Sobrio te sirve y puedes aportar, ayudas a sostener el proyecto. Basta con una estrella o incluir discusiones.
+
+## Contanos tu experiencia
+
+Si Progreso Sobrio te ayudó, puedes contarlo de forma **completamente anónima** (no pedimos nombre ni mail) en [este formulario](https://docs.google.com/forms/d/e/1FAIpQLSc9oG92I_hm_MhiHEwnJEDB-SFooflUpTM7wKmFU1tYlNSeIQ/viewform). Si prefieres escribir directo en cambio, podés hacerlo a **contacto.progresosobrio@gmail.com**.
 
 ## Licencia
 
