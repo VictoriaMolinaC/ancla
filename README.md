@@ -11,12 +11,12 @@ Acompaña el día a día de una persona en proceso de abstinencia de sustancias,
 - **100% offline** una vez cargada, funciona sin conexión a internet.
 - **Sin backend, sin servidor externo.** Todos los datos se guardan solo en tu navegador (IndexedDB).
 - **Sin analytics, sin llamadas de red con tus datos.** Nada sale de tu dispositivo.
-- Eres dueño de tus datos: podés exportarlos e importarlos cuando quieras.
+- Eres dueño de tus datos: puedes exportarlos e importarlos cuando quieras.
 
 ## Qué hace
 
 - **Tour de bienvenida**, una sola vez, antes de entrar por primera vez: te explica en 4 tarjetas cortas dónde está el registro diario, dónde ver tu progreso, y que tu red de apoyo está siempre a un toque en el icono de corazón.
-- **Racha de sobriedad** por sustancia , lo primero que ves al abrir la app, y puedes tener varias en paralelo.
+- **Racha de sobriedad** por sustancia, lo primero que ves al abrir la app, y puedes tener varias en paralelo.
 - **Registro diario en menos de 30 segundos**: LPM en reposo, craving, sueño, actividad física, energía, ánimo, hábitos cumplidos, disparadores y notas.
 - **Historial** en tabla y calendario, editable.
 - **Gráficas** de LPM en reposo, sueño y actividad a lo largo del tiempo.
@@ -27,7 +27,7 @@ Acompaña el día a día de una persona en proceso de abstinencia de sustancias,
 
 ## Por qué existe
 
-No sé encontro una app chilena dedicada a esto, lo más cercano es la línea/chat 1412 de SENDA y "PlanSobrio", una app de encuentro social para gente sobria en Latinoamérica, pero con otro propósito (no es un tracker diario).
+No encontramos una app chilena dedicada a esto, lo más cercano es la línea/chat 1412 de SENDA y "PlanSobrio", una app de encuentro social para gente sobria en Latinoamérica, pero con otro propósito (no es un tracker diario).
 
 Progreso Sobrio se diferencia por ser open source, una PWA instalable que funciona sin conexión, con profundidad real de correlación entre LPM, sueño, craving y ánimo, soporte para varias sustancias en paralelo, e integración directa con la red de apoyo chilena.
 
@@ -38,14 +38,14 @@ Recorrido de 30 segundos por la app: puerta de edad, paneles, registros y gráfi
 https://github.com/user-attachments/assets/80c0d663-ca59-4575-95fd-866ea09e65de
 
 
-Lo primero al abrir: confirmar mayoría de edad. Quien declara ser menor de edad le muestra la línea 1412.
+Lo primero al abrir: confirmar mayoría de edad. Quien declara ser menor de edad, se le muestra la línea 1412.
 
 <p align="center">
 <img src=".github/screenshots/puerta-edad.png" width="240" alt="Pantalla de confirmación de mayoría de edad, modo claro">
 <img src=".github/screenshots/puerta-edad-dark.png" width="240" alt="Pantalla de confirmación de mayoría de edad, modo oscuro">
 </p>
 
-Después, un tour de 4 tarjetas, explica dónde está cada cosa antes de entrar a la app.
+Después, un tour de 4 tarjetas explica dónde está cada cosa antes de entrar a la app.
 
 <table>
 <tr>
@@ -94,7 +94,7 @@ Si Progreso Sobrio te sirve y puedes aportar, ayudas a sostener el proyecto. Bas
 
 ## Contanos tu experiencia
 
-Si Progreso Sobrio te ayudó, puedes contarlo de forma **completamente anónima** (no pedimos nombre ni mail) en [este formulario](https://docs.google.com/forms/d/e/1FAIpQLSc9oG92I_hm_MhiHEwnJEDB-SFooflUpTM7wKmFU1tYlNSeIQ/viewform). Si prefieres escribir directo en cambio, podés hacerlo a **contacto.progresosobrio@gmail.com**.
+Si Progreso Sobrio te ayudó, puedes contarlo de forma **completamente anónima** (no pedimos nombre ni mail) en [este formulario](https://docs.google.com/forms/d/e/1FAIpQLSc9oG92I_hm_MhiHEwnJEDB-SFooflUpTM7wKmFU1tYlNSeIQ/viewform). Si prefieres escribir directo en cambio, puedes hacerlo a **contacto.progresosobrio@gmail.com**.
 
 ## Licencia
 
