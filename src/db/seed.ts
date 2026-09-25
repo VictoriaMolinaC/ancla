@@ -70,7 +70,7 @@ export async function seedDatabaseIfEmpty(): Promise<void> {
           energy: clamp1to5(2 + progress * 2),
           mood: clamp1to5(2 + progress * 2 - (dayIndex % 5 === 0 ? 1 : 0)),
           habitIds: didActivity ? [habitIds[0], habitIds[3]] : [habitIds[0]],
-          notes: dayIndex === 0 ? 'Primer registro con Ancla.' : undefined,
+          notes: dayIndex === 0 ? 'Primer registro con Progreso Sobrio.' : undefined,
           createdAt: nowIso,
           updatedAt: nowIso,
         });
